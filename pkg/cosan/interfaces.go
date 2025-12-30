@@ -204,7 +204,7 @@ type ResponseWriter interface {
 	JSON(code int, v interface{}) error
 
 	// String writes a formatted string response with the given status code.
-	String(code int, format string, args ...interface{})
+	String(code int, format string, args ...interface{}) error
 
 	// Status sets the HTTP status code.
 	// Must be called before writing response body.
