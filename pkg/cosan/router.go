@@ -49,7 +49,7 @@ func New(opts ...Option) Router {
 	r := &router{
 		routes:     make([]*route, 0),
 		middleware: make([]Middleware, 0),
-		matcher:    newSimpleMatcher(), // Simple exact matcher for Phase 1
+		matcher:    newRadixMatcher(), // Radix tree matcher with path parameters
 		compiled:   false,
 	}
 
