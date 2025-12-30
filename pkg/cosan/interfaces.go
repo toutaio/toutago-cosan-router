@@ -206,6 +206,9 @@ type ResponseWriter interface {
 	// String writes a formatted string response with the given status code.
 	String(code int, format string, args ...interface{}) error
 
+	// HTML writes an HTML response with the given status code.
+	HTML(code int, html string) error
+
 	// Status sets the HTTP status code.
 	// Must be called before writing response body.
 	Status(code int)

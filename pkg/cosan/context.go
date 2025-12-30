@@ -99,6 +99,14 @@ func (c *context) String(code int, format string, args ...interface{}) error {
 	return nil
 }
 
+// HTML writes an HTML response with the given status code.
+func (c *context) HTML(code int, html string) error {
+	c.res.Header().Set("Content-Type", "text/html; charset=utf-8")
+	c.res.WriteHeader(code)
+	_, err := c.res.Write([]byte(html))
+	return err
+}
+
 // Status sets the HTTP status code.
 func (c *context) Status(code int) {
 	c.res.WriteHeader(code)
