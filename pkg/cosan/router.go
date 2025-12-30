@@ -12,14 +12,16 @@ type router struct {
 	middleware []Middleware
 	matcher    Matcher
 	compiled   bool
+	hooks      *hooks
 	mu         sync.RWMutex
 }
 
 // route represents a registered HTTP route.
 type route struct {
-	method  string
-	pattern string
-	handler HandlerFunc
+	method   string
+	pattern  string
+	handler  HandlerFunc
+	metadata *RouteMetadata
 }
 
 // Pattern returns the route pattern.
