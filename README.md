@@ -98,20 +98,64 @@ router.GET("/users/:id", func(ctx cosan.Context, user *User) error {
 
 ## Documentation
 
+### Getting Started
+- [Installation & Quick Start](#quick-start)
+- [Examples](./examples/) - Working code examples
+- [API Documentation](https://pkg.go.dev/github.com/toutaio/toutago-cosan-router)
+
+### Guides
+- [Performance Tuning](./docs/guides/performance.md)
+- [Troubleshooting](./docs/guides/troubleshooting.md)
+- [Interface Documentation](./docs/INTERFACES.md)
+
+### Migration
+- [From Chi](./docs/migration/from-chi.md)
+- [From Gin](./docs/migration/from-gin.md)
+- [From Echo](./docs/migration/from-echo.md)
+
+### Architecture
+- [ADR 001: Interface-First Design](./docs/adr/001-interface-first-design.md)
+- [ADR 002: Radix Tree Routing](./docs/adr/002-radix-tree-routing.md)
+- [ADR 003: Error Handling Strategy](./docs/adr/003-error-handling-strategy.md)
+- [ADR 004: Optional Ecosystem Integrations](./docs/adr/004-optional-ecosystem-integrations.md)
+
+### Project Planning
 - [Complete Implementation Plan](./openspec/IMPLEMENTATION_PLAN.md)
 - [Project Context & Conventions](./openspec/project.md)
-- [API Documentation](https://pkg.go.dev/github.com/toutaio/toutago-cosan-router)
-- [Examples](./examples/)
 
 ## Development Status
 
-**Current Phase:** Phase 1 - Foundation & Core Routing
+**Current Phase:** Phase 4 - Documentation & Ecosystem Integration
 
-- [x] Project setup and structure
-- [ ] Core interfaces definition
-- [ ] Basic router implementation
-- [ ] Middleware chain support
-- [ ] >80% test coverage
+### Completed Phases
+- [x] Phase 1: Foundation & Core Routing
+  - [x] Project setup and structure
+  - [x] Core interfaces definition
+  - [x] Basic router implementation
+  - [x] Middleware chain support
+- [x] Phase 2: Advanced Routing Features
+  - [x] Route groups
+  - [x] Path parameters
+  - [x] Wildcard routes
+  - [x] Static file serving
+- [x] Phase 3: Performance & Optimization
+  - [x] Context pooling
+  - [x] Route caching
+  - [x] Benchmarks and profiling
+  - [x] Performance optimization
+
+### Current Phase
+- [x] Phase 4.1: Documentation
+  - [x] Comprehensive README
+  - [x] API documentation
+  - [x] Migration guides (Chi, Gin, Echo)
+  - [x] Architecture Decision Records
+  - [x] Performance tuning guide
+  - [x] Troubleshooting guide
+- [ ] Phase 4.2: Examples & Templates
+- [ ] Phase 4.3: Testing & Quality
+- [ ] Phase 4.4: Community & Release
+- [ ] Phase 4.5: Ecosystem Integration
 
 See [IMPLEMENTATION_PLAN.md](./openspec/IMPLEMENTATION_PLAN.md) for complete roadmap.
 
