@@ -67,6 +67,18 @@ import (
 //	}
 type HandlerFunc func(Context) error
 
+// RequestHook is a function that runs before request processing.
+// Hooks can return errors to abort the request early.
+type RequestHook func(req *http.Request) error
+
+// ResponseHook is a function that runs after response is written.
+// Hooks cannot abort the request but can perform logging, metrics, etc.
+type ResponseHook func(req *http.Request, statusCode int)
+
+// ErrorHandler is a custom error handling function for the router.
+// It receives the context and error, allowing custom error responses.
+type ErrorHandler func(ctx Context, err error)
+
 // Router defines the interface for HTTP routing and server management.
 // It follows the Single Responsibility Principle by focusing solely on
 // route registration and HTTP request handling.
@@ -121,6 +133,26 @@ type Router interface {
 	// This is a convenience method equivalent to:
 	//   http.ListenAndServe(addr, router)
 	Listen(addr string) error
+
+	// BeforeRequest registers a hook to run before each request.
+	// Hooks execute in registration order and can return errors to abort.
+	BeforeRequest(hook RequestHook)
+
+	// AfterResponse registers a hook to run after each response.
+	// Hooks execute in registration order and cannot abort requests.
+	AfterResponse(hook ResponseHook)
+
+	// SetErrorHandler sets a custom error handler for the router.
+	// If not set, a default error handler is used.
+	SetErrorHandler(handler ErrorHandler)
+
+	// GetRoutes returns all registered routes with metadata for introspection.
+	// Useful for documentation generation and route inspection.
+	GetRoutes() []RouteInfo
+
+	// FindRoute finds a route by name from its metadata.
+	// Returns nil if no route with the given name exists.
+	FindRoute(name string) *RouteInfo
 }
 
 // Route represents a registered HTTP route.

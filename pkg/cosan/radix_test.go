@@ -241,7 +241,12 @@ router := New()
 var capturedParams map[string]string
 
 router.GET("/users/:userID/posts/:postID/comments/:commentID", func(ctx Context) error {
-capturedParams = ctx.Params()
+// Make a copy since context will be pooled
+params := ctx.Params()
+capturedParams = make(map[string]string)
+for k, v := range params {
+capturedParams[k] = v
+}
 return ctx.String(200, "OK")
 })
 

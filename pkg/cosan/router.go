@@ -5,6 +5,28 @@ import (
 	"sync"
 )
 
+// statusRecorder wraps http.ResponseWriter to capture status code
+type statusRecorder struct {
+	http.ResponseWriter
+	statusCode int
+	written    bool
+}
+
+func (r *statusRecorder) WriteHeader(code int) {
+	if !r.written {
+		r.statusCode = code
+		r.written = true
+		r.ResponseWriter.WriteHeader(code)
+	}
+}
+
+func (r *statusRecorder) Write(b []byte) (int, error) {
+	if !r.written {
+		r.WriteHeader(200)
+	}
+	return r.ResponseWriter.Write(b)
+}
+
 // router is the default implementation of the Router interface.
 // It provides method-based routing, middleware support, and exact path matching.
 type router struct {
@@ -151,6 +173,13 @@ func (r *router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	// Ensure router is compiled
 	r.ensureCompiled()
 
+	// Execute before-request hooks
+	if err := r.executeBeforeHooks(req); err != nil {
+		ctx := newContext(w, req, nil)
+		r.handleError(ctx, err)
+		return
+	}
+
 	// Match route
 	routeInterface, params, found := r.matcher.Match(req.Method, req.URL.Path)
 	if !found {
@@ -159,8 +188,14 @@ func (r *router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	// Create context
-	ctx := newContext(w, req, params)
+	// Create context (using pool for performance)
+	ctx := acquireContext(w, req)
+	defer releaseContext(ctx)
+	
+	// Set params
+	for k, v := range params {
+		ctx.params[k] = v
+	}
 
 	// Get handler from route interface
 	handler := (*routeInterface).Handler()
@@ -170,11 +205,20 @@ func (r *router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		handler = r.middleware[i].Process(handler)
 	}
 
-	// Execute handler
+	// Execute handler and capture status
+	var statusCode int
+	statusCapture := &statusRecorder{ResponseWriter: w, statusCode: 200}
+	ctx.res = statusCapture
+	
 	if err := handler(ctx); err != nil {
-		// TODO: Phase 1.4 - Proper error handling
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		r.handleError(ctx, err)
+		statusCode = statusCapture.statusCode
+	} else {
+		statusCode = statusCapture.statusCode
 	}
+
+	// Execute after-response hooks
+	r.executeAfterHooks(req, statusCode)
 }
 
 // Listen starts the HTTP server on the specified address.
@@ -302,4 +346,29 @@ func (g *routerGroup) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 // Listen starts the server (delegates to parent router).
 func (g *routerGroup) Listen(addr string) error {
 	return g.router.Listen(addr)
+}
+
+// BeforeRequest delegates to parent router.
+func (g *routerGroup) BeforeRequest(hook RequestHook) {
+	g.router.BeforeRequest(hook)
+}
+
+// AfterResponse delegates to parent router.
+func (g *routerGroup) AfterResponse(hook ResponseHook) {
+	g.router.AfterResponse(hook)
+}
+
+// SetErrorHandler delegates to parent router.
+func (g *routerGroup) SetErrorHandler(handler ErrorHandler) {
+	g.router.SetErrorHandler(handler)
+}
+
+// GetRoutes delegates to parent router.
+func (g *routerGroup) GetRoutes() []RouteInfo {
+	return g.router.GetRoutes()
+}
+
+// FindRoute delegates to parent router.
+func (g *routerGroup) FindRoute(name string) *RouteInfo {
+	return g.router.FindRoute(name)
 }

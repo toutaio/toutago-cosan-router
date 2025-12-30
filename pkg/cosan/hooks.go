@@ -2,15 +2,6 @@ package cosan
 
 import "net/http"
 
-// RequestHook is a function that runs before request processing
-type RequestHook func(req *http.Request) error
-
-// ResponseHook is a function that runs after response is written
-type ResponseHook func(req *http.Request, statusCode int)
-
-// ErrorHandler is a custom error handling function
-type ErrorHandler func(ctx Context, err error)
-
 // hooks stores router-level hooks for lifecycle events
 type hooks struct {
 	beforeRequest []RequestHook
