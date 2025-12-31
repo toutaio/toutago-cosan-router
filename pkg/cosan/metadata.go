@@ -20,12 +20,6 @@ type RouteInfo struct {
 	Version     string
 }
 
-// routeWithMetadata extends route with metadata capabilities
-type routeWithMetadata struct {
-	*route
-	metadata *RouteMetadata
-}
-
 // WithName sets the name of the route for documentation
 func WithName(name string) RouteOption {
 	return func(r *route) {
@@ -90,7 +84,7 @@ func (r *router) GetRoutes() []RouteInfo {
 			Method:  route.method,
 			Pattern: route.pattern,
 		}
-		
+
 		if route.metadata != nil {
 			info.Name = route.metadata.Name
 			info.Description = route.metadata.Description
@@ -98,10 +92,10 @@ func (r *router) GetRoutes() []RouteInfo {
 			info.Deprecated = route.metadata.Deprecated
 			info.Version = route.metadata.Version
 		}
-		
+
 		routes = append(routes, info)
 	}
-	
+
 	return routes
 }
 
@@ -123,6 +117,6 @@ func (r *router) FindRoute(name string) *RouteInfo {
 			}
 		}
 	}
-	
+
 	return nil
 }

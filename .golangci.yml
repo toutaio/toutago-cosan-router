@@ -26,7 +26,7 @@ linters:
     - unparam
     - nakedret
     - prealloc
-    - exportloopref
+    # - exportloopref # Deprecated in Go 1.22+
     - nolintlint
 
 linters-settings:

@@ -23,11 +23,11 @@ func FuzzRouterPath(f *testing.F) {
 		}
 
 		router := New()
-		
+
 		router.GET("/users", func(ctx Context) error {
 			return ctx.String(200, "users")
 		})
-		
+
 		router.GET("/users/:id", func(ctx Context) error {
 			return ctx.String(200, "user")
 		})
@@ -35,13 +35,13 @@ func FuzzRouterPath(f *testing.F) {
 		// Try to match the path - should not panic
 		req := httptest.NewRequest("GET", path, nil)
 		w := httptest.NewRecorder()
-		
+
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Router panicked on path %q: %v", path, r)
 			}
 		}()
-		
+
 		router.ServeHTTP(w, req)
 	})
 }
@@ -56,7 +56,7 @@ func FuzzJSONInput(f *testing.F) {
 
 	f.Fuzz(func(t *testing.T, jsonData string) {
 		router := New()
-		
+
 		router.POST("/data", func(ctx Context) error {
 			var data map[string]interface{}
 			_ = ctx.Bind(&data) // Ignore error, just test for panics
@@ -66,13 +66,13 @@ func FuzzJSONInput(f *testing.F) {
 		req := httptest.NewRequest("POST", "/data", bytes.NewBufferString(jsonData))
 		req.Header.Set("Content-Type", "application/json")
 		w := httptest.NewRecorder()
-		
+
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Router panicked on JSON %q: %v", jsonData, r)
 			}
 		}()
-		
+
 		router.ServeHTTP(w, req)
 	})
 }
@@ -92,7 +92,7 @@ func FuzzParamNames(f *testing.F) {
 		}
 
 		router := New()
-		
+
 		pattern := "/items/:" + paramName
 		router.GET(pattern, func(ctx Context) error {
 			_ = ctx.Param(paramName)
@@ -101,13 +101,13 @@ func FuzzParamNames(f *testing.F) {
 
 		req := httptest.NewRequest("GET", "/items/123", nil)
 		w := httptest.NewRecorder()
-		
+
 		defer func() {
 			if r := recover(); r != nil {
 				t.Errorf("Router panicked with param name %q: %v", paramName, r)
 			}
 		}()
-		
+
 		router.ServeHTTP(w, req)
 	})
 }

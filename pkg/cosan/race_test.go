@@ -70,10 +70,10 @@ func TestConcurrentRouteRegistration(t *testing.T) {
 // TestConcurrentMiddleware tests concurrent middleware execution
 func TestConcurrentMiddleware(t *testing.T) {
 	r := New()
-	
+
 	counter := 0
 	var mu sync.Mutex
-	
+
 	r.Use(MiddlewareFunc(func(next HandlerFunc) HandlerFunc {
 		return func(ctx Context) error {
 			mu.Lock()
@@ -82,7 +82,7 @@ func TestConcurrentMiddleware(t *testing.T) {
 			return next(ctx)
 		}
 	}))
-	
+
 	r.GET("/test", func(ctx Context) error {
 		return ctx.String(200, "OK")
 	})
@@ -140,7 +140,7 @@ func TestHighConcurrencyLoad(t *testing.T) {
 	}
 
 	r := New()
-	
+
 	// Add multiple routes
 	r.GET("/", func(ctx Context) error { return ctx.String(200, "home") })
 	r.GET("/about", func(ctx Context) error { return ctx.String(200, "about") })
@@ -154,9 +154,9 @@ func TestHighConcurrencyLoad(t *testing.T) {
 	wg.Add(goroutines)
 
 	for i := 0; i < goroutines; i++ {
-		go func(id int) {
+		go func(_ int) {
 			defer wg.Done()
-			
+
 			routes := []string{"/", "/about", "/contact", "/users/123"}
 			for j := 0; j < requestsPerGoroutine; j++ {
 				route := routes[j%len(routes)]

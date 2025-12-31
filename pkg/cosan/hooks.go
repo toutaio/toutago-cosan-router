@@ -13,7 +13,7 @@ type hooks struct {
 func (r *router) BeforeRequest(hook RequestHook) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
-	
+
 	if r.hooks == nil {
 		r.hooks = &hooks{}
 	}
@@ -24,7 +24,7 @@ func (r *router) BeforeRequest(hook RequestHook) {
 func (r *router) AfterResponse(hook ResponseHook) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
-	
+
 	if r.hooks == nil {
 		r.hooks = &hooks{}
 	}
@@ -35,7 +35,7 @@ func (r *router) AfterResponse(hook ResponseHook) {
 func (r *router) SetErrorHandler(handler ErrorHandler) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
-	
+
 	if r.hooks == nil {
 		r.hooks = &hooks{}
 	}
@@ -47,13 +47,13 @@ func (r *router) executeBeforeHooks(req *http.Request) error {
 	if r.hooks == nil {
 		return nil
 	}
-	
+
 	for _, hook := range r.hooks.beforeRequest {
 		if err := hook(req); err != nil {
 			return err
 		}
 	}
-	
+
 	return nil
 }
 
@@ -62,7 +62,7 @@ func (r *router) executeAfterHooks(req *http.Request, statusCode int) {
 	if r.hooks == nil {
 		return
 	}
-	
+
 	for _, hook := range r.hooks.afterResponse {
 		hook(req, statusCode)
 	}
@@ -74,7 +74,7 @@ func (r *router) handleError(ctx Context, err error) {
 		r.hooks.errorHandler(ctx, err)
 		return
 	}
-	
+
 	// Default error handling
-	ctx.String(500, "Internal Server Error: "+err.Error())
+	_ = ctx.String(500, "Internal Server Error: "+err.Error())
 }

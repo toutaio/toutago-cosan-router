@@ -63,7 +63,7 @@ func CreateUserHandler(ctx cosan.Context) error {
 	var user User
 	if err := ctx.Bind(&user); err != nil {
 		return ctx.JSON(400, map[string]interface{}{
-			"error": "Invalid request body",
+			"error":   "Invalid request body",
 			"details": err.Error(),
 		})
 	}
@@ -90,7 +90,7 @@ func UpdateUserHandler(ctx cosan.Context) error {
 	var user User
 	if err := ctx.Bind(&user); err != nil {
 		return ctx.JSON(400, map[string]interface{}{
-			"error": "Invalid request body",
+			"error":   "Invalid request body",
 			"details": err.Error(),
 		})
 	}
@@ -110,7 +110,7 @@ func RegisterHandler(ctx cosan.Context) error {
 	var req CreateUserRequest
 	if err := ctx.Bind(&req); err != nil {
 		return ctx.JSON(400, map[string]interface{}{
-			"error": "Invalid registration data",
+			"error":   "Invalid registration data",
 			"details": err.Error(),
 		})
 	}
@@ -184,8 +184,8 @@ func UploadHandler(ctx cosan.Context) error {
 	description := ctx.Request().FormValue("description")
 
 	return ctx.JSON(200, map[string]interface{}{
-		"message": "File uploaded successfully",
-		"title":   title,
+		"message":     "File uploaded successfully",
+		"title":       title,
 		"description": description,
 	})
 }
@@ -203,7 +203,7 @@ func UpdateProfileHandler(ctx cosan.Context) error {
 	var profile ProfileUpdate
 	if err := ctx.Bind(&profile); err != nil {
 		return ctx.JSON(400, map[string]interface{}{
-			"error": "Invalid profile data",
+			"error":   "Invalid profile data",
 			"details": err.Error(),
 		})
 	}

@@ -34,7 +34,7 @@ func main() {
 	admin.DELETE("/users/:id", DeleteUserHandler)
 
 	// Route-specific middleware - apply to handler
-	slowHandler := cosan.MiddlewareFunc(TimeoutMiddleware(5*time.Second)).Process(SlowHandler)
+	slowHandler := cosan.MiddlewareFunc(TimeoutMiddleware(5 * time.Second)).Process(SlowHandler)
 	router.GET("/slow", slowHandler)
 
 	log.Println("Server starting on http://localhost:8080")

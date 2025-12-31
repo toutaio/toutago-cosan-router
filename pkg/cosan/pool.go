@@ -32,11 +32,11 @@ func releaseContext(ctx *context) {
 	for k := range ctx.values {
 		delete(ctx.values, k)
 	}
-	
+
 	// Reset fields
 	ctx.req = nil
 	ctx.res = nil
-	
+
 	// Return to pool
 	contextPool.Put(ctx)
 }

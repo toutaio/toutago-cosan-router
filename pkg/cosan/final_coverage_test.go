@@ -12,7 +12,7 @@ func TestContext_Set_Get(t *testing.T) {
 	router.GET("/test", func(ctx Context) error {
 		ctx.Set("user", "john")
 		ctx.Set("role", "admin")
-		
+
 		if ctx.Get("user") != "john" {
 			return ctx.String(500, "Get failed")
 		}
@@ -22,7 +22,7 @@ func TestContext_Set_Get(t *testing.T) {
 		if ctx.Get("missing") != nil {
 			return ctx.String(500, "Should return nil for missing key")
 		}
-		
+
 		return ctx.String(200, "OK")
 	})
 
@@ -81,4 +81,3 @@ func TestRouterGroup_Methods(t *testing.T) {
 		t.Errorf("HEAD: expected 200, got %d", w.Code)
 	}
 }
-

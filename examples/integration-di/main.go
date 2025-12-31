@@ -110,7 +110,7 @@ func NewUserController(userService UserService) *UserController {
 
 func (c *UserController) GetUser(ctx cosan.Context) error {
 	_ = ctx.Param("id") // Path parameter
-	
+
 	// With NASC DI, parameters can be auto-injected:
 	// func (c *UserController) GetUser(ctx cosan.Context, id int) error {
 	//     user, err := c.userService.GetUser(id)
@@ -155,7 +155,7 @@ func (c *ProductController) GetProduct(ctx cosan.Context) error {
 	// }
 
 	_ = ctx.Param("id") // Path parameter
-	productID := 1 // Simplified
+	productID := 1      // Simplified
 	product, err := c.productService.GetProduct(productID)
 	if err != nil {
 		return ctx.JSON(500, map[string]string{"error": err.Error()})

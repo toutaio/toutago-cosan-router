@@ -3,6 +3,7 @@ package cosan
 import (
 	"net/http"
 	"sync"
+	"time"
 )
 
 // statusRecorder wraps http.ResponseWriter to capture status code
@@ -191,7 +192,7 @@ func (r *router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	// Create context (using pool for performance)
 	ctx := acquireContext(w, req)
 	defer releaseContext(ctx)
-	
+
 	// Set params
 	for k, v := range params {
 		ctx.params[k] = v
@@ -209,7 +210,7 @@ func (r *router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	var statusCode int
 	statusCapture := &statusRecorder{ResponseWriter: w, statusCode: 200}
 	ctx.res = statusCapture
-	
+
 	if err := handler(ctx); err != nil {
 		r.handleError(ctx, err)
 		statusCode = statusCapture.statusCode
@@ -222,13 +223,24 @@ func (r *router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 }
 
 // Listen starts the HTTP server on the specified address.
-// This is a convenience method equivalent to http.ListenAndServe(addr, router).
+// This is a convenience method that creates an http.Server with reasonable
+// timeout defaults and starts listening.
+//
+// For production use, consider creating your own http.Server with custom
+// timeouts and configuration.
 //
 // Example:
 //
 //	router.Listen(":8080")
 func (r *router) Listen(addr string) error {
-	return http.ListenAndServe(addr, r)
+	server := &http.Server{
+		Addr:         addr,
+		Handler:      r,
+		ReadTimeout:  15 * time.Second,
+		WriteTimeout: 15 * time.Second,
+		IdleTimeout:  60 * time.Second,
+	}
+	return server.ListenAndServe()
 }
 
 // registerRoute registers a new route with the router.

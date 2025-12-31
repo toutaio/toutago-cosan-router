@@ -326,8 +326,9 @@ type Matcher interface {
 // Middleware wraps a handler and returns a new handler.
 //
 // Middleware is executed in the order registered (outer to inner):
-//   router.Use(LoggingMiddleware, AuthMiddleware)
-//   // Request flow: Logging → Auth → Handler → Auth → Logging
+//
+//	router.Use(LoggingMiddleware, AuthMiddleware)
+//	// Request flow: Logging → Auth → Handler → Auth → Logging
 //
 // Example:
 //

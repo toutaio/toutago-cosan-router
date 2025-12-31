@@ -111,11 +111,11 @@ func TestRouteMetadata_MultipleOptions(t *testing.T) {
 
 func TestRouter_GetRoutes(t *testing.T) {
 	router := New()
-	
+
 	router.GET("/users", func(ctx Context) error {
 		return ctx.String(200, "users")
 	})
-	
+
 	router.POST("/users", func(ctx Context) error {
 		return ctx.String(200, "create user")
 	})

@@ -86,8 +86,8 @@ func TestSimpleMatcher_MultipleRoutes(t *testing.T) {
 
 	// Test all routes
 	tests := []struct {
-		method  string
-		path    string
+		method      string
+		path        string
 		shouldMatch bool
 	}{
 		{"GET", "/users", true},

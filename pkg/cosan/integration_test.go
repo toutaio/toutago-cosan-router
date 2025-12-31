@@ -202,7 +202,7 @@ func TestIntegration_ContentNegotiation(t *testing.T) {
 
 	router.POST("/data", func(ctx Context) error {
 		contentType := ctx.Request().Header.Get("Content-Type")
-		
+
 		var data map[string]interface{}
 		if err := ctx.Bind(&data); err != nil {
 			return err

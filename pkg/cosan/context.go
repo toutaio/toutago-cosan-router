@@ -59,7 +59,7 @@ func (c *context) QueryAll(key string) []string {
 // For Phase 1, this only supports JSON.
 func (c *context) Bind(v interface{}) error {
 	contentType := c.req.Header.Get("Content-Type")
-	
+
 	// For Phase 1, only support JSON
 	if contentType != "application/json" && contentType != "" {
 		return fmt.Errorf("unsupported content type: %s", contentType)
@@ -95,8 +95,8 @@ func (c *context) JSON(code int, v interface{}) error {
 func (c *context) String(code int, format string, args ...interface{}) error {
 	c.res.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	c.res.WriteHeader(code)
-	fmt.Fprintf(c.res, format, args...)
-	return nil
+	_, err := fmt.Fprintf(c.res, format, args...)
+	return err
 }
 
 // HTML writes an HTML response with the given status code.
