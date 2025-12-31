@@ -1,3 +1,3 @@
 module github.com/toutaio/toutago-cosan-router
 
-go 1.21.5
+go 1.22
