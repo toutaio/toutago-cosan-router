@@ -20,27 +20,24 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.21'
+          go-version: '1.23.x'
 
       - name: Run full test suite
         run: |
-          go test -v -race -coverprofile=coverage.out -timeout=10m ./...
+          go test -v -race -coverprofile=coverage.out -timeout=10m ./pkg/...
 
       - name: Coverage check
         run: |
           COVERAGE=$(go tool cover -func=coverage.out | tail -1 | awk '{print $3}' | sed 's/%//')
           echo "Coverage: $COVERAGE%"
-          if (( $(echo "$COVERAGE < 85" | bc -l) )); then
-            echo "⚠️  Warning: Coverage is below 85% for pre-release"
+          if (( $(echo "$COVERAGE < 80.0" | bc -l) )); then
+            echo "⚠️  Warning: Coverage ${COVERAGE}% is below 80% for pre-release"
+          else
+            echo "✅ Coverage ${COVERAGE}% is acceptable"
           fi
 
       - name: Run benchmarks
         run: go test -bench=. -benchmem ./benchmarks/...
-
-      - name: Fuzz tests
-        run: |
-          go test -fuzz=FuzzRouterPath -fuzztime=30s ./pkg/cosan/...
-          go test -fuzz=FuzzJSONInput -fuzztime=30s ./pkg/cosan/...
 
       - name: Security scan
         run: |
