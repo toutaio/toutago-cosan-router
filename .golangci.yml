@@ -12,10 +12,7 @@ linters:
     - staticcheck
     - unused
     - gosimple
-    - structcheck
-    - varcheck
     - ineffassign
-    - deadcode
     - typecheck
     - gosec
     - gocyclo
@@ -26,7 +23,6 @@ linters:
     - unparam
     - nakedret
     - prealloc
-    # - exportloopref # Deprecated in Go 1.22+
     - nolintlint
 
 linters-settings:
@@ -71,6 +67,7 @@ issues:
         - lll
 
 output:
-  format: colored-line-number
+  formats:
+    - format: colored-line-number
   print-issued-lines: true
   print-linter-name: true
