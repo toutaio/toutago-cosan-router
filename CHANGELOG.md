@@ -6,11 +6,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- Improved documentation and changelog details
 
-### Added
-- Initial development
+## [1.0.5] - 2026-01-02
 
-## [1.0.0] - 2025-01-TBD
+### Changed
+- Updated README documentation
+
+## [1.0.4] - 2025-12-31
+
+### Changed
+- Modified GitHub workflows
+- Improved CI/CD pipeline configuration
+
+## [1.0.3] - 2025-12-30
+
+### Changed
+- Improved code quality
+- Enhanced code standards and linting compliance
+
+## [1.0.2] - 2025-12-29
+
+### Changed
+- Improved GitHub workflows
+- Enhanced CI/CD automation
+
+## [1.0.1] - 2025-12-28
+
+### Changed
+- Improved code quality and test coverage
+- Enhanced testing infrastructure
+
+## [1.0.0] - 2025-12-27
 
 ### Added
 
@@ -86,5 +113,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ready for production use
 - Full semantic versioning support going forward
 
-[Unreleased]: https://github.com/toutaio/toutago-cosan-router/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/toutaio/toutago-cosan-router/compare/v1.0.5...HEAD
+[1.0.5]: https://github.com/toutaio/toutago-cosan-router/releases/tag/v1.0.5
+[1.0.4]: https://github.com/toutaio/toutago-cosan-router/releases/tag/v1.0.4
+[1.0.3]: https://github.com/toutaio/toutago-cosan-router/releases/tag/v1.0.3
+[1.0.2]: https://github.com/toutaio/toutago-cosan-router/releases/tag/v1.0.2
+[1.0.1]: https://github.com/toutaio/toutago-cosan-router/releases/tag/v1.0.1
 [1.0.0]: https://github.com/toutaio/toutago-cosan-router/releases/tag/v1.0.0

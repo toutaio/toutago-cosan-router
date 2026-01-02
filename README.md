@@ -7,6 +7,12 @@
 
 > **Cosan** (Irish for "pathway") - A production-ready HTTP router for Go that embodies SOLID principles and interface-first design.
 
+## Status
+
+✅ **Production Ready** - Stable v1.0+ releases  
+📦 [View Releases](https://github.com/toutaio/toutago-cosan-router/releases) for the latest version  
+📖 [Changelog](CHANGELOG.md) - Full version history
+
 ## Features
 
 - 🎯 **SOLID Principles Compliance** - Demonstrates all five SOLID principles in practice
