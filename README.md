@@ -125,10 +125,6 @@ router.GET("/users/:id", func(ctx cosan.Context, user *User) error {
 - [ADR 003: Error Handling Strategy](./docs/adr/003-error-handling-strategy.md)
 - [ADR 004: Optional Ecosystem Integrations](./docs/adr/004-optional-ecosystem-integrations.md)
 
-### Project Planning
-- [Complete Implementation Plan](./openspec/IMPLEMENTATION_PLAN.md)
-- [Project Context & Conventions](./openspec/project.md)
-
 ## Development Status
 
 **Current Phase:** Phase 4 - Documentation & Ecosystem Integration
@@ -162,8 +158,6 @@ router.GET("/users/:id", func(ctx cosan.Context, user *User) error {
 - [x] Phase 4.3: Testing & Quality
 - [x] Phase 4.4: Community & Release
 - [x] Phase 4.5: Ecosystem Integration
-
-See [IMPLEMENTATION_PLAN.md](./openspec/IMPLEMENTATION_PLAN.md) for complete roadmap and release history.
 
 ## Contributing
 
