@@ -6,7 +6,7 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/toutaio/toutago-cosan-router"
+	cosan "github.com/toutaio/toutago-cosan-router"
 )
 
 type Product struct {

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/toutaio/toutago-cosan-router"
+	cosan "github.com/toutaio/toutago-cosan-router"
 	"github.com/toutaio/toutago-cosan-router/middleware"
 )
 

@@ -3,7 +3,7 @@ package middleware
 import (
 	"testing"
 
-	"github.com/toutaio/toutago-cosan-router"
+	cosan "github.com/toutaio/toutago-cosan-router"
 )
 
 // TestMiddleware_CORSAllOrigins tests CORS with all origins
