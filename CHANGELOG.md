@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.0.0] - 2026-01-08
+## [1.1.0] - 2026-01-08
 
-### BREAKING CHANGES
+### Changed
+- Refactored package structure to follow Go library best practices
+- All source files now at module root for cleaner imports
+- No functional changes - all APIs remain identical
 - **Package structure refactoring**: Moved main package from `pkg/cosan/` to module root
   - Old import: `github.com/toutaio/toutago-cosan-router/pkg/cosan`
   - New import: `github.com/toutaio/toutago-cosan-router`
@@ -17,13 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Old import: `github.com/toutaio/toutago-cosan-router/pkg/middleware`
   - New import: `github.com/toutaio/toutago-cosan-router/middleware`
 
-### Changed
-- Refactored package structure to follow Go library best practices
-- All source files now at module root for cleaner imports
-- No functional changes - all APIs remain identical
-
-### Added
-- MIGRATION.md guide for upgrading from v1.x to v2.x
 
 ### Notes
 - See MIGRATION.md for detailed upgrade instructions
