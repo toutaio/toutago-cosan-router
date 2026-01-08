@@ -3,7 +3,7 @@ package cosan_test
 import (
 	"testing"
 
-	"github.com/toutaio/toutago-cosan-router/pkg/cosan"
+	"github.com/toutaio/toutago-cosan-router"
 )
 
 // TestHandlerFuncSignature verifies the HandlerFunc type signature.

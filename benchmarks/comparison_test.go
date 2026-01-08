@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/toutaio/toutago-cosan-router/pkg/cosan"
+	"github.com/toutaio/toutago-cosan-router"
 )
 
 // Benchmark comparison suite against stdlib

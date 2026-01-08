@@ -30,7 +30,7 @@ package main
 
 import (
     "log"
-    "github.com/toutaio/toutago-cosan-router/pkg/cosan"
+    "github.com/toutaio/toutago-cosan-router"
 )
 
 func main() {

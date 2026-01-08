@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/toutaio/toutago-cosan-router/pkg/cosan"
+	"github.com/toutaio/toutago-cosan-router"
 )
 
 // Service interfaces

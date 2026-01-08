@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/toutaio/toutago-cosan-router/pkg/cosan"
+	"github.com/toutaio/toutago-cosan-router"
 )
 
 // ExampleNew demonstrates basic router creation and usage

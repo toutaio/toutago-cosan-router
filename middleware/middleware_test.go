@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/toutaio/toutago-cosan-router/pkg/cosan"
-	"github.com/toutaio/toutago-cosan-router/pkg/middleware"
+	"github.com/toutaio/toutago-cosan-router"
+	"github.com/toutaio/toutago-cosan-router/middleware"
 )
 
 func TestLogger(t *testing.T) {
